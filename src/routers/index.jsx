@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Layout } from "components";
-import { Main } from "pages";
+import { Main, SubMain } from "pages";
 
 const RootRouter = () => {
   return (
@@ -10,6 +10,9 @@ const RootRouter = () => {
         <Switch>
           <Route exact path="/">
             <Main />
+          </Route>
+          <Route exact path="/submain">
+            <SubMain />
           </Route>
           <Router path="*">404 Error</Router>
         </Switch>
