@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { VscLock } from "react-icons/vsc";
 
 const Header = styled.div`
   height: 100px;
@@ -32,6 +33,33 @@ const AddItemButton = styled.div`
   background-color: blue;
 `;
 
+const PrivateWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 500px;
+`;
+
+const Icon = styled.div`
+  font-size: 100pt;
+`;
+
+const Text = styled.div`
+  font-size: 15pt;
+`;
+
+const Private = () => {
+  return (
+    <PrivateWrapper>
+      <Icon>
+        <VscLock />
+      </Icon>
+      <Text>비공개 위시리스트 입니다.</Text>
+    </PrivateWrapper>
+  );
+};
+
 const Main = () => {
   const history = useHistory();
 
@@ -46,6 +74,7 @@ const Main = () => {
   return (
     <>
       <Header />
+      {/* <Private /> */}
       <GridWrapper>
         <ItemCard onClick={handleItemClick} />
         <ItemCard />
