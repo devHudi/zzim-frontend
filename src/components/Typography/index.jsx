@@ -13,9 +13,14 @@ const CommonTypography = styled.div`
 `;
 
 Typography.FormTitle = styled(CommonTypography)`
+  margin-bottom: 7px;
+  font-size: 13pt;
   font-weight: bold;
 `;
 
-Typography.FormValue = styled(CommonTypography)``;
+Typography.FormValue = styled(CommonTypography)`
+  font-size: 13pt;
+  margin-bottom: 15px;
+`;
 
 export default Typography;
