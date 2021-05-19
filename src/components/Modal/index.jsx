@@ -14,7 +14,7 @@ const Body = styled.div`
   position: relative;
   height: 400px;
   padding: 20px;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const ButtonWrapper = styled.div`
