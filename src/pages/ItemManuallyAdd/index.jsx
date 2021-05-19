@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import _, { assign } from "lodash";
+import _ from "lodash";
+import { toast } from "react-toastify";
 
 import {
   PagePadding,
@@ -34,6 +35,7 @@ const ItemManullyAdd = () => {
     navigator.clipboard.readText().then((clipText) => {
       if (_.includes(clipText, "https://") || _.includes(clipText, "http://")) {
         setUrl(clipText);
+        toast("복사된 URL을 자동으로 입력합니다.");
       }
     });
   }, []);

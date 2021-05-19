@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import comma from "comma-number";
+import { toast } from "react-toastify";
 
 import {
   PagePadding,
@@ -38,9 +39,13 @@ const ItemDetail = () => {
 
   const submitModify = () => {};
 
-  const handlePurchase = () => {};
+  const handlePurchase = () => {
+    toast("구매 처리 되었습니다.");
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    toast("삭제 처리 되었습니다.");
+  };
 
   return (
     <>
