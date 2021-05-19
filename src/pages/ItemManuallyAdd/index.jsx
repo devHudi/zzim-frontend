@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import _, { assign } from "lodash";
+
 import {
   PagePadding,
   Space,
@@ -23,6 +27,25 @@ const FlexBox = styled.div`
 `;
 
 const ItemManullyAdd = () => {
+  const history = useHistory();
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    navigator.clipboard.readText().then((clipText) => {
+      if (_.includes(clipText, "https://") || _.includes(clipText, "http://")) {
+        setUrl(clipText);
+      }
+    });
+  }, []);
+
+  const handleChange = (e) => {
+    setUrl(e.target.value);
+  };
+
+  const handleNext = () => {
+    history.push("/fetching");
+  };
+
   return (
     <>
       <BackWrapper>
@@ -34,11 +57,11 @@ const ItemManullyAdd = () => {
           <Space size={15} />
           <Typography.Subtitle>쇼핑몰 URL을 입력해주세요.</Typography.Subtitle>
           <Space size={15} />
-          <input type="text" />
+          <input type="text" value={url} onChange={handleChange} />
         </PagePadding>
       </FlexBox>
       <ButtonGroup fixed>
-        <Button>다음으로</Button>
+        <Button onClick={handleNext}>다음으로</Button>
       </ButtonGroup>
     </>
   );
