@@ -5,6 +5,7 @@ import {
   Main,
   ItemDetail,
   ItemManuallyAdd,
+  Fetching,
   NotSupported,
   AddComplete,
   Share,
@@ -23,6 +24,9 @@ const RootRouter = () => {
           </Route>
           <Route exact path="/item-manually-add">
             <ItemManuallyAdd />
+          </Route>
+          <Route exact path="/fetching">
+            <Fetching />
           </Route>
           <Route exact path="/not-supported">
             <NotSupported />
