@@ -10,7 +10,8 @@ const Layout = ({ children }) => {
       {spinner.visible && <PageSpinner />}
       <GlobalStyles />
       <ToastContainer
-        position="bottom-center"
+        position="top-center"
+        autoClose={2000}
         closeOnClick
         draggable
         hideProgressBar
