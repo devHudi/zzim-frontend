@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
 import { createStore } from "redux";
@@ -19,4 +20,5 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+serviceWorkerRegistration.register();
 reportWebVitals();
