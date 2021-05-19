@@ -36,7 +36,9 @@ const Menu = styled.li`
   cursor: pointer;
   transition: background-color 0.3s;
 
-  ${(props) => props.red && "color: #e03131;"}
+  color: ${(props) => props.red && "#e03131"};
+  color: ${(props) => props.green && "#2f9e44"};
+  color: ${(props) => props.blue && "#1971c2"};
 
   &:last-child {
     border-bottom: none;
@@ -62,8 +64,7 @@ const MeatBallsMenu = ({ children, left, white }) => {
 
       {visible && (
         <MenuWrapper left={left} onClick={handleClick}>
-          {" "}
-          {children}{" "}
+          {children}
         </MenuWrapper>
       )}
     </Wrapper>
