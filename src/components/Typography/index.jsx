@@ -12,6 +12,15 @@ const CommonTypography = styled.div`
   text-overflow: ellipsis;
 `;
 
+Typography.Title = styled(CommonTypography)`
+  font-size: 20pt;
+  font-weight: bold;
+`;
+
+Typography.Subtitle = styled(CommonTypography)`
+  font-size: 15pt;
+`;
+
 Typography.FormTitle = styled(CommonTypography)`
   margin-bottom: 7px;
   font-size: 13pt;
