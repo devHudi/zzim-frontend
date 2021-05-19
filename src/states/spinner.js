@@ -8,18 +8,22 @@ export const SHOW_SPINNER = "showSpinner";
 export const HIDE_SPINNER = "hideSpinner";
 
 // action
-export const showSpinner = {
-  type: SHOW_SPINNER,
-  data: {
-    visible: true,
-  },
+export const showSpinner = () => {
+  return {
+    type: SHOW_SPINNER,
+    data: {
+      visible: true,
+    },
+  };
 };
 
-export const hideSpinner = {
-  type: HIDE_SPINNER,
-  data: {
-    visible: false,
-  },
+export const hideSpinner = () => {
+  return {
+    type: HIDE_SPINNER,
+    data: {
+      visible: false,
+    },
+  };
 };
 
 // reducer
