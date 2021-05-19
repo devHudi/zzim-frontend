@@ -20,6 +20,7 @@ const Icon = styled.span`
 const MenuWrapper = styled.ul`
   position: absolute;
   top: 30px;
+  right: ${(props) => (props.left ? 0 : "inherit")};
   border: 1px solid #f1f3f5;
   background-color: #ffffff;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
@@ -45,7 +46,7 @@ const Menu = styled.li`
   }
 `;
 
-const MeatBallsMenu = ({ children }) => {
+const MeatBallsMenu = ({ children, left }) => {
   const [visible, setVisible] = useState(false);
 
   const handleClick = () => {
@@ -58,7 +59,7 @@ const MeatBallsMenu = ({ children }) => {
         <BsThreeDots />
       </Icon>
 
-      {visible && <MenuWrapper> {children} </MenuWrapper>}
+      {visible && <MenuWrapper left={left}> {children} </MenuWrapper>}
     </Wrapper>
   );
 };
