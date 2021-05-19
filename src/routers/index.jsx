@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Layout } from "components";
-import { Main, Share } from "pages";
+import { Main, ItemDetail, Share } from "pages";
 
 const RootRouter = () => {
   return (
@@ -10,6 +10,9 @@ const RootRouter = () => {
         <Switch>
           <Route exact path="/">
             <Main />
+          </Route>
+          <Route exact path="/item-detail/:id">
+            <ItemDetail />
           </Route>
           <Route exact path="/share-target">
             <Share />
