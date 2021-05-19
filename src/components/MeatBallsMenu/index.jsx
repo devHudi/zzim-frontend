@@ -8,7 +8,7 @@ const Wrapper = styled.span`
 
 const Icon = styled.span`
   cursor: pointer;
-  font-size: 20px;
+  font-size: 28px;
   color: ${(props) => (props.white ? "#ffffff" : "#adb5bd")};
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
   transition: color 0.3s;
@@ -60,7 +60,12 @@ const MeatBallsMenu = ({ children, left, white }) => {
         <BsThreeDots />
       </Icon>
 
-      {visible && <MenuWrapper left={left}> {children} </MenuWrapper>}
+      {visible && (
+        <MenuWrapper left={left} onClick={handleClick}>
+          {" "}
+          {children}{" "}
+        </MenuWrapper>
+      )}
     </Wrapper>
   );
 };
