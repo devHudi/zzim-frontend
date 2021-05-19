@@ -9,11 +9,12 @@ const Wrapper = styled.span`
 const Icon = styled.span`
   cursor: pointer;
   font-size: 20px;
-  color: #adb5bd;
+  color: ${(props) => (props.white ? "#ffffff" : "#adb5bd")};
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
   transition: color 0.3s;
 
   &:hover {
-    color: #868e96;
+    color: ${(props) => (props.white ? "#f1f3f5" : "#868e96")};
   }
 `;
 
@@ -46,7 +47,7 @@ const Menu = styled.li`
   }
 `;
 
-const MeatBallsMenu = ({ children, left }) => {
+const MeatBallsMenu = ({ children, left, white }) => {
   const [visible, setVisible] = useState(false);
 
   const handleClick = () => {
@@ -55,7 +56,7 @@ const MeatBallsMenu = ({ children, left }) => {
 
   return (
     <Wrapper>
-      <Icon onClick={handleClick}>
+      <Icon onClick={handleClick} white={white}>
         <BsThreeDots />
       </Icon>
 
