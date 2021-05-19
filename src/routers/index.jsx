@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Layout } from "components";
-import { Main, ItemDetail, ItemManuallyAdd, Share } from "pages";
+import { Main, ItemDetail, ItemManuallyAdd, NotSupported, Share } from "pages";
 
 const RootRouter = () => {
   return (
@@ -16,6 +16,9 @@ const RootRouter = () => {
           </Route>
           <Route exact path="/item-manually-add">
             <ItemManuallyAdd />
+          </Route>
+          <Route exact path="/not-supported">
+            <NotSupported />
           </Route>
           <Route exact path="/share-target">
             <Share />
