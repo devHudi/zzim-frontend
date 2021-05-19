@@ -4,7 +4,7 @@ const ButtonGroup = styled.div`
   display: flex;
 
   & > button {
-    flex: 1;
+    padding: 15px 20px;
   }
 
   ${(props) =>

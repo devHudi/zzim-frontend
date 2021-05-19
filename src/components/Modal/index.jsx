@@ -15,10 +15,6 @@ const Body = styled.div`
 const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
-
-  & > button {
-    flex: 1;
-  }
 `;
 
 const Modal = ({ children, buttons }) => {
