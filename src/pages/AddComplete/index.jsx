@@ -1,4 +1,6 @@
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearUrl } from "states/form";
 import styled from "styled-components";
 import { BsCheck } from "react-icons/bs";
 
@@ -29,6 +31,12 @@ const Text = styled.div`
 
 const NotSupported = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(clearUrl());
+    history.push("/");
+  };
 
   return (
     <FlexBox>
@@ -39,7 +47,7 @@ const NotSupported = () => {
         <Space size={20} />
         <Text>상품이 성공적으로 담아졌습니다.</Text>
         <Space size={40} />
-        <Button onClick={() => history.push("/")}> 확인 </Button>
+        <Button onClick={handleClick}> 확인 </Button>
       </div>
     </FlexBox>
   );

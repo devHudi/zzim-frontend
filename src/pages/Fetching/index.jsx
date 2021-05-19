@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MDSpinner from "react-md-spinner";
@@ -24,6 +25,7 @@ const dummyItem = {};
 
 const Fetching = () => {
   const history = useHistory();
+  const form = useSelector((state) => state.form);
   const [item, setItem] = useState();
   const [modify, setModify] = useState(false);
 
@@ -43,6 +45,8 @@ const Fetching = () => {
       setItem(dummyItem);
     }, 3000);
   }, []);
+
+  console.log(form.url);
 
   return (
     <FlexBox>

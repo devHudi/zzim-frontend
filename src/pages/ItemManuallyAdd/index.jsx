@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUrl } from "states/form";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import _ from "lodash";
@@ -29,22 +31,24 @@ const FlexBox = styled.div`
 
 const ItemManullyAdd = () => {
   const history = useHistory();
-  const [url, setUrl] = useState("");
+  const dispatch = useDispatch();
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     navigator.clipboard.readText().then((clipText) => {
       if (_.includes(clipText, "https://") || _.includes(clipText, "http://")) {
-        setUrl(clipText);
+        setInput(clipText);
         toast("복사된 URL을 자동으로 입력합니다.");
       }
     });
   }, []);
 
   const handleChange = (e) => {
-    setUrl(e.target.value);
+    setInput(e.target.value);
   };
 
   const handleNext = () => {
+    dispatch(setUrl(input));
     history.push("/fetching");
   };
 
@@ -59,7 +63,7 @@ const ItemManullyAdd = () => {
           <Space size={15} />
           <Typography.Subtitle>쇼핑몰 URL을 입력해주세요.</Typography.Subtitle>
           <Space size={15} />
-          <input type="text" value={url} onChange={handleChange} />
+          <input type="text" value={input} onChange={handleChange} />
         </PagePadding>
       </FlexBox>
       <ButtonGroup fixed>
