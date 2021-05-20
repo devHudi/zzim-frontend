@@ -9,8 +9,6 @@ import rootReducer from "states";
 
 import RootRouter from "routers";
 
-import "react-toastify/dist/ReactToastify.css";
-
 const store = createStore(rootReducer);
 
 ReactDOM.render(

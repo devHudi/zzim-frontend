@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import toast from "react-simple-toasts";
 import styled from "styled-components";
 import MDSpinner from "react-md-spinner";
 import moment from "moment";
@@ -31,7 +32,7 @@ const Fetching = () => {
 
   const handleModify = () => {
     if (modify) {
-      alert("수정되었습니다.");
+      toast("수정되었습니다.");
     }
     setModify(!modify);
   };

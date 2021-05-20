@@ -4,7 +4,7 @@ import { setUrl } from "states/form";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import _ from "lodash";
-import { toast } from "react-toastify";
+import toast from "react-simple-toasts";
 
 import {
   PagePadding,

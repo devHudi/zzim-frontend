@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
 import comma from "comma-number";
-import { toast } from "react-toastify";
+import toast from "react-simple-toasts";
 
 import {
   PagePadding,
@@ -27,12 +28,13 @@ const MenuWrapper = styled.div`
 `;
 
 const ItemDetail = () => {
+  const history = useHistory();
   const [modify, setModify] = useState(false);
 
   const handleModify = () => {
     if (modify) {
       submitModify();
-      alert("수정되었습니다.");
+      toast("수정되었습니다.");
     }
     setModify(!modify);
   };
@@ -41,10 +43,12 @@ const ItemDetail = () => {
 
   const handlePurchase = () => {
     toast("구매 처리 되었습니다.");
+    history.push("/");
   };
 
   const handleDelete = () => {
     toast("삭제 처리 되었습니다.");
+    history.push("/");
   };
 
   return (
