@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { VscLock } from "react-icons/vsc";
-
-const Header = styled.div`
-  height: 100px;
-  background-color: black;
-`;
+import { Header } from "components";
 
 const GridWrapper = styled.div`
   padding: 10px;
