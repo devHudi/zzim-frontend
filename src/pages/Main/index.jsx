@@ -1,19 +1,14 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { VscLock } from "react-icons/vsc";
-import { Header, AddItemButton } from "components";
+import { Header, AddItemButton, ItemCard, TextField } from "components";
 
 const GridWrapper = styled.div`
-  padding: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 10px;
-`;
-
-const ItemCard = styled.div`
-  height: 150px;
-  background-color: #999999;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 5px;
+  justify-items: center;
 `;
 
 const PrivateWrapper = styled.div`
@@ -58,6 +53,7 @@ const Main = () => {
     <>
       <Header />
       {/* <Private /> */}
+      <TextField />
       <GridWrapper>
         <ItemCard onClick={handleItemClick} />
         <ItemCard />

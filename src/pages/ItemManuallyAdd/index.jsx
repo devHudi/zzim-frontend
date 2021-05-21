@@ -13,6 +13,7 @@ import {
   Typography,
   ButtonGroup,
   Button,
+  TextField,
 } from "components";
 
 const BackWrapper = styled.div`
@@ -63,7 +64,7 @@ const ItemManullyAdd = () => {
           <Space size={15} />
           <Typography.Subtitle>쇼핑몰 URL을 입력해주세요.</Typography.Subtitle>
           <Space size={15} />
-          <input type="text" value={input} onChange={handleChange} />
+          <TextField value={input} onChange={handleChange}></TextField>
         </PagePadding>
       </FlexBox>
       <ButtonGroup fixed>

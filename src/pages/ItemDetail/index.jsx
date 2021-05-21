@@ -13,6 +13,7 @@ import {
   Typography,
   Space,
   MallLogo,
+  TextField,
 } from "components";
 
 const BackWrapper = styled.div`
@@ -77,21 +78,21 @@ const ItemDetail = () => {
         }
         <Typography.FormTitle>상품명</Typography.FormTitle>
         {modify ? (
-          <input type="text" />
+          <TextField></TextField>
         ) : (
           <Typography.FormValue>예쁜반팔</Typography.FormValue>
         )}
         <Space />
         <Typography.FormTitle>가격</Typography.FormTitle>{" "}
         {modify ? (
-          <input type="text" />
+          <TextField></TextField>
         ) : (
           <Typography.FormValue>{comma(35000)} 원</Typography.FormValue>
         )}
         <Space />
         <Typography.FormTitle>배송비</Typography.FormTitle>
         {modify ? (
-          <input type="text" />
+          <TextField></TextField>
         ) : (
           <Typography.FormValue>{comma(2500)} 원</Typography.FormValue>
         )}

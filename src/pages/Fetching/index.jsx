@@ -7,7 +7,15 @@ import MDSpinner from "react-md-spinner";
 import moment from "moment";
 import comma from "comma-number";
 
-import { Modal, Image, Typography, Space, Button, MallLogo } from "components";
+import {
+  Modal,
+  Image,
+  Typography,
+  Space,
+  Button,
+  MallLogo,
+  TextField,
+} from "components";
 
 const FlexBox = styled.div`
   height: 100%;
@@ -66,21 +74,21 @@ const Fetching = () => {
           />
           <Typography.FormTitle>상품명</Typography.FormTitle>
           {modify ? (
-            <input type="text" />
+            <TextField></TextField>
           ) : (
             <Typography.FormValue>예쁜반팔</Typography.FormValue>
           )}
           <Space />
           <Typography.FormTitle>가격</Typography.FormTitle>{" "}
           {modify ? (
-            <input type="text" />
+            <TextField></TextField>
           ) : (
             <Typography.FormValue>{comma(35000)} 원</Typography.FormValue>
           )}
           <Space />
           <Typography.FormTitle>배송비</Typography.FormTitle>
           {modify ? (
-            <input type="text" />
+            <TextField></TextField>
           ) : (
             <Typography.FormValue>{comma(2500)} 원</Typography.FormValue>
           )}
