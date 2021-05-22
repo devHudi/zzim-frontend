@@ -10,7 +10,7 @@ const TextField = styled.input`
   transition: border 0.3s;
 
   &:focus {
-    border: 1px solid #000000;
+    border: 1px solid #495057;
   }
 `;
 
