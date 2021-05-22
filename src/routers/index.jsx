@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 
 import { Layout } from "components";
 import {
@@ -9,16 +14,16 @@ import {
   NotSupported,
   AddComplete,
   Share,
+  Sign,
 } from "pages";
 
 const RootRouter = () => {
+  const history = useHistory();
+
   return (
     <Router>
       <Layout>
         <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
           <Route exact path="/item-detail/:id">
             <ItemDetail />
           </Route>
@@ -37,7 +42,18 @@ const RootRouter = () => {
           <Route exact path="/share-target">
             <Share />
           </Route>
-          <Router path="*">404 Error</Router>
+          <Route exact path="/sign">
+            <Sign />
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route exact path="/:id">
+            <Main noPublic />
+          </Route>
+          <Router path="*">
+            <Main />
+          </Router>
         </Switch>
       </Layout>
     </Router>
