@@ -8,11 +8,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  body {
-    background-color: #f8f9fa;
-  }
-
-  * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+  * { font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important; }
 `;
 
 export default GlobalStyle;
