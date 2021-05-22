@@ -8,7 +8,10 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  * { font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important; }
+  * {
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important;
+    box-sizing: border-box;
+  }
 `;
 
 export default GlobalStyle;
