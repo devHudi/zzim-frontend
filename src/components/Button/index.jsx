@@ -10,8 +10,17 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
 
+  ${(props) =>
+    props.inverted &&
+    `
+  background-color: #ffffff;
+  border: 1px solid #212529;
+  color: #212529;
+  
+`}
+
   &:hover {
-    background-color: #101418;
+    background-color: ${(props) => (props.inverted ? "#f1f3f5" : "#101418")};
   }
 `;
 
