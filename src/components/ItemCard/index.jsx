@@ -3,8 +3,8 @@ import comma from "comma-number";
 import toast from "react-simple-toasts";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Image, MeatBallsMenu } from "components";
-import { IoHeart } from "react-icons/io5";
+import Skeleton from "react-loading-skeleton";
+import { Image } from "components";
 
 const Wrapper = styled.div`
   position: relative;
@@ -53,39 +53,22 @@ const ItemPrice = styled.div`
   font-weight: bold;
 `;
 
-const ItemCard = ({ name, shop, price, thumb, onClick }) => {
-  const history = useHistory();
-  const [modify, setModify] = useState(false);
-
-  const handleModify = () => {
-    if (modify) {
-      submitModify();
-      toast("수정되었습니다.");
-    }
-    setModify(!modify);
-  };
-
-  const submitModify = () => {};
-
-  const handlePurchase = () => {
-    toast("구매 처리 되었습니다.");
-    history.push("/");
-  };
-
-  const handleDelete = () => {
-    toast("삭제 처리 되었습니다.");
-    history.push("/");
-  };
-
+const ItemCard = ({ name, shop, price, thumb, skeleton, onClick }) => {
   return (
     <Wrapper onClick={onClick}>
       <ImageWrapper>
-        <Image height="165px" src={thumb} />
+        {!skeleton ? (
+          <Image height="165px" src={thumb} />
+        ) : (
+          <Skeleton height={165} />
+        )}
       </ImageWrapper>
       <TextWrapper>
-        <ItemName> {name} </ItemName>
-        <ItemShop> {shop} </ItemShop>
-        <ItemPrice> {comma(price)} 원 </ItemPrice>
+        <ItemName>{!skeleton ? name : <Skeleton />}</ItemName>
+        <ItemShop>{!skeleton ? shop : <Skeleton />} </ItemShop>
+        <ItemPrice>
+          {!skeleton ? <>{comma(price)} 원</> : <Skeleton />}
+        </ItemPrice>
       </TextWrapper>
     </Wrapper>
   );

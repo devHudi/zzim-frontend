@@ -1,6 +1,11 @@
 import { useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import toast from "react-simple-toasts";
+import { useDispatch } from "react-redux";
+import { showSpinner, hideSpinner } from "states/spinner";
+import { signIn, signUp } from "apis/Auth";
+
 import { BackButton, ButtonGroup, Button } from "components";
 
 const FormWrapper = styled.div`
@@ -45,7 +50,8 @@ const validForm = (id, password) => {
   return id.length > 5 && password.length > 6; //TODO: add regex
 };
 
-const SignIn = () => {
+const SignInForm = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +60,11 @@ const SignIn = () => {
     return validForm(id, password);
   }, [id, password]);
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
+    dispatch(showSpinner());
+    await signUp();
+    dispatch(hideSpinner());
+    toast("로그인 되었습니다. ");
     history.push("/");
   };
 
@@ -81,7 +91,8 @@ const SignIn = () => {
   );
 };
 
-const SignUp = () => {
+const SignUpForm = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -91,7 +102,11 @@ const SignUp = () => {
     return validForm(id, password) && password === passwordRepeat;
   }, [id, password, passwordRepeat]);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
+    dispatch(showSpinner());
+    await signIn();
+    dispatch(hideSpinner());
+    toast("회원가입 되었습니다. ");
     history.push("/");
   };
 
@@ -177,7 +192,7 @@ const Sign = () => {
           회원가입
         </ModeButton>
 
-        {signIn ? <SignIn /> : <SignUp />}
+        {signIn ? <SignInForm /> : <SignUpForm />}
       </PageWrapper>
     </>
   );

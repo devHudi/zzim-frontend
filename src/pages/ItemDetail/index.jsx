@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
 import comma from "comma-number";
 import toast from "react-simple-toasts";
+import Skeleton from "react-loading-skeleton";
+import { useDispatch } from "react-redux";
+import { showSpinner, hideSpinner } from "states/spinner";
+import {
+  getItemDetail,
+  updateItemDetail,
+  purchaseItem,
+  removeItem,
+} from "apis/Item";
 
 import {
   PagePadding,
@@ -12,10 +21,9 @@ import {
   Image,
   Button,
   Space,
-  MallLogo,
   TextField,
+  ButtonGroup,
 } from "components";
-import ButtonGroup from "components/ButtonGroup";
 
 const MenuWrapper = styled.div`
   padding: 10px;
@@ -54,6 +62,10 @@ const DetailTitle = styled.span`
   font-weight: bold;
 `;
 
+const Logo = styled.img`
+  height: 11pt;
+`;
+
 const DetailDesc = styled.span`
   max-width: 70%;
   font-size: 11pt;
@@ -72,31 +84,50 @@ const PartnersInfo = styled.div`
 `;
 
 const ItemDetail = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [modify, setModify] = useState(false);
+  const [item, setItem] = useState();
 
-  const handleModify = () => {
+  useEffect(() => {
+    const fetchItem = async () => {
+      const item = await getItemDetail("itemId");
+      setItem(item);
+    };
+
+    fetchItem();
+  }, []);
+
+  const submitModify = async () => {
+    dispatch(showSpinner());
+    const { name, price, shippingPrice } = item;
+    const newItem = await updateItemDetail("item1", name, price, shippingPrice);
+    setItem(newItem);
+    dispatch(hideSpinner());
+  };
+
+  const handleModify = async () => {
     if (modify) {
-      submitModify();
+      await submitModify();
       toast("수정되었습니다.");
     }
     setModify(!modify);
   };
 
-  const submitModify = () => {};
-
-  const handlePurchase = () => {
+  const handlePurchase = async () => {
+    dispatch(showSpinner());
+    await purchaseItem("itemId");
     toast("구매 처리 되었습니다.");
     history.push("/");
+    dispatch(hideSpinner());
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    dispatch(showSpinner());
+    await removeItem("itemId");
     toast("삭제 처리 되었습니다.");
     history.push("/");
-  };
-
-  const handleOutLink = () => {
-    window.open("http://www.naver.com");
+    dispatch(hideSpinner());
   };
 
   return (
@@ -118,48 +149,91 @@ const ItemDetail = () => {
 
       <TitleWrapper>
         {modify ? (
-          <TextField />
+          <TextField
+            value={item?.name}
+            onChange={(e) => setItem({ ...item, name: e.target.value })}
+          />
         ) : (
-          <ItemName>메종키츠네 더블 폭스헤드 반팔 티셔츠 BU0</ItemName>
+          <ItemName>{item?.name || <Skeleton />}</ItemName>
         )}
         <Space />
         {modify ? (
-          <TextField type="number" />
+          <TextField
+            value={item?.price}
+            type="number"
+            onChange={(e) => setItem({ ...item, price: e.target.value })}
+          />
         ) : (
-          <ItemPrice>{comma(35000)} 원</ItemPrice>
+          <ItemPrice>
+            {item?.price ? (
+              <>{comma(item.price)} 원</>
+            ) : (
+              <Skeleton width={100} />
+            )}
+          </ItemPrice>
         )}
         <Space size="20" />
       </TitleWrapper>
 
-      <Image src="https://image.a-land.co.kr/data/aland_data/images/product/11/00/10/53/37/b_1100105337.gif"></Image>
+      {item?.image ? (
+        <Image src={item.image}></Image>
+      ) : (
+        <Skeleton height={300} />
+      )}
+
       <Space size="20" />
 
       <PagePadding>
         <FlexBox>
           <DetailTitle>배송비</DetailTitle>
           {modify ? (
-            <TextField type="number" small right />
+            <TextField
+              value={item?.shippingPrice}
+              type="number"
+              small
+              right
+              onChange={(e) =>
+                setItem({ ...item, shippingPrice: e.target.value })
+              }
+            />
           ) : (
-            <DetailDesc>{comma(2500)} 원</DetailDesc>
+            <DetailDesc>
+              {item?.shippingPrice ? (
+                <>{comma(item.shippingPrice)} 원</>
+              ) : (
+                <Skeleton width={100} />
+              )}
+            </DetailDesc>
           )}
         </FlexBox>
 
         <FlexBox>
           <DetailTitle>쇼핑몰</DetailTitle>
-          <MallLogo mall="coupang" height="15px" />
+
+          {item?.logoImage ? (
+            <Logo src={item.logoImage} />
+          ) : (
+            <Skeleton width={100} />
+          )}
         </FlexBox>
 
         <FlexBox>
           <DetailTitle>담은 날짜</DetailTitle>
           <DetailDesc>
-            {moment(new Date()).format("YYYY년 MM월 DD일")}
+            {item?.createdDate ? (
+              <>{moment(item.createdDate).format("YYYY년 MM월 DD일")}</>
+            ) : (
+              <Skeleton width={100} />
+            )}
           </DetailDesc>
         </FlexBox>
 
         <Space size="20" />
 
         <ButtonGroup>
-          <Button onClick={handleOutLink}> 상품 바로가기</Button>
+          <Button disabled={!item?.url} onClick={() => window.open(item?.url)}>
+            상품 바로가기
+          </Button>
         </ButtonGroup>
         <PartnersInfo>
           해당 링크를 통해 제품 구매가 이루어진 경우 쿠팡 파트너스 활동 일환으로
