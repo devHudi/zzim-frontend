@@ -8,20 +8,15 @@ const Button = styled.button`
   font-size: 12pt;
   color: #f8f9fa;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
 
   ${(props) =>
-    props.inverted &&
+    props.disabled &&
     `
-  background-color: #ffffff;
-  border: 1px solid #212529;
-  color: #212529;
-  
+  background-color: #dee2e6;
+  border: 1px solid #dee2e6;
+  color: #868e96;
 `}
-
-  &:hover {
-    background-color: ${(props) => (props.inverted ? "#f1f3f5" : "#101418")};
-  }
 `;
 
 export default Button;
