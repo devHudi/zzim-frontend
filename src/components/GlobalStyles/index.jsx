@@ -8,9 +8,11 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  * {
-    font-family: 'Noto Sans KR', sans-serif;
+  body {
+    background-color: #f8f9fa;
   }
+
+  * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
 `;
 
 export default GlobalStyle;
