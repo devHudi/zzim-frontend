@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUrl } from "states/form";
@@ -33,8 +34,11 @@ const NotSupported = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  useEffect(() => {
     dispatch(clearUrl());
+  }, [dispatch]);
+
+  const handleClick = () => {
     history.push("/");
   };
 
