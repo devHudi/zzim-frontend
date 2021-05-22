@@ -60,7 +60,7 @@ const Main = () => {
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <Header name="thanos50per" itemAmount={17} />
       {/* <Private /> */}
       <GridWrapper>
         <ItemCard
