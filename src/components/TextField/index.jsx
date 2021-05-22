@@ -9,6 +9,14 @@ const TextField = styled.input`
   outline: none;
   transition: border 0.3s;
 
+  ${(props) => props.right && `text-align: right;`}
+
+  ${(props) =>
+    props.small &&
+    `
+  padding: 5px;
+  font-size: 8pt;`}
+
   &:focus {
     border: 1px solid #495057;
   }
