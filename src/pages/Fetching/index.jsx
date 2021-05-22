@@ -51,7 +51,8 @@ const Fetching = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setItem(dummyItem);
+      history.push("/add-complete");
+      // setItem(dummyItem);
     }, 3000);
   }, []);
 
