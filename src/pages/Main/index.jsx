@@ -4,10 +4,11 @@ import { VscLock } from "react-icons/vsc";
 import { Header, AddItemButton, ItemCard, TextField } from "components";
 
 const GridWrapper = styled.div`
+  max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: minmax(50px, auto);
-  grid-gap: 5px;
+  padding: 15px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
   justify-items: center;
 `;
 
@@ -53,16 +54,77 @@ const Main = () => {
     <>
       <Header />
       {/* <Private /> */}
-      <TextField />
       <GridWrapper>
-        <ItemCard onClick={handleItemClick} />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
+        <ItemCard
+          name="[국내배송] 21SS 아미 스몰 하트 로고 반팔 티셔츠 네이비 E21HJ108 723"
+          shop="ALAND"
+          price={148000}
+          thumb="https://image.a-land.co.kr/data/aland_data/images/product/11/00/10/53/37/b_1100105337.gif"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="메종키츠네 더블 폭스헤드 반팔 티셔츠 BU0"
+          shop="MUST IT"
+          price={133400}
+          thumb="https://shopping-phinf.pstatic.net/main_2570920/25709205299.20210319161324.jpg?type=f640"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="빅 트위치 로고 티셔츠 화이트"
+          shop="MUSINSA"
+          price={28822}
+          thumb="https://image.msscdn.net/images/goods_img/20181112/903340/903340_6_500.jpg"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="T-Logo Tee Black"
+          shop="MUSINSA"
+          price={39000}
+          thumb="https://image.msscdn.net/images/goods_img/20210311/1840098/1840098_1_500.jpg"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="당도선별 성주 벽진참외"
+          shop="Coupang"
+          price={14500}
+          thumb="https://thumbnail8.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/2021/03/08/15/2/bbba37d0-1da7-4d22-aa0c-d0320d30fb38.jpg"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="[국내배송] 21SS 아미 스몰 하트 로고 반팔 티셔츠 네이비 E21HJ108 723"
+          shop="ALAND"
+          price={148000}
+          thumb="https://image.a-land.co.kr/data/aland_data/images/product/11/00/10/53/37/b_1100105337.gif"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="메종키츠네 더블 폭스헤드 반팔 티셔츠 BU0"
+          shop="MUST IT"
+          price={133400}
+          thumb="https://shopping-phinf.pstatic.net/main_2570920/25709205299.20210319161324.jpg?type=f640"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="빅 트위치 로고 티셔츠 화이트"
+          shop="MUSINSA"
+          price={28822}
+          thumb="https://image.msscdn.net/images/goods_img/20181112/903340/903340_6_500.jpg"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="T-Logo Tee Black"
+          shop="MUSINSA"
+          price={39000}
+          thumb="https://image.msscdn.net/images/goods_img/20210311/1840098/1840098_1_500.jpg"
+          onClick={handleItemClick}
+        />
+        <ItemCard
+          name="당도선별 성주 벽진참외"
+          shop="Coupang"
+          price={14500}
+          thumb="https://thumbnail8.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/2021/03/08/15/2/bbba37d0-1da7-4d22-aa0c-d0320d30fb38.jpg"
+          onClick={handleItemClick}
+        />
       </GridWrapper>
       <AddItemButton onClick={handleAddClick} />
     </>
