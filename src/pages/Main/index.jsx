@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { VscLock } from "react-icons/vsc";
-import { Header, AddItemButton, ItemCard, TextField } from "components";
+import { Header, AddItemButton, ItemCard } from "components";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #f8f9fa;
+  }
+`;
 
 const GridWrapper = styled.div`
   max-width: 100%;
@@ -52,6 +59,7 @@ const Main = () => {
 
   return (
     <>
+      <GlobalStyle />
       <Header />
       {/* <Private /> */}
       <GridWrapper>
