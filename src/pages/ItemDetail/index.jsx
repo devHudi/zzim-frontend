@@ -58,6 +58,14 @@ const DetailDesc = styled.span`
   color: #343a40;
 `;
 
+const PartnersInfo = styled.div`
+  margin-top: 15px;
+  font-size: 9pt;
+  font-weight: lighter;
+  color: #adb5bd;
+  line-height: 1.6;
+`;
+
 const ItemDetail = () => {
   const history = useHistory();
   const [modify, setModify] = useState(false);
@@ -140,6 +148,10 @@ const ItemDetail = () => {
         <ButtonGroup>
           <Button onClick={handleOutLink}> 상품 바로가기</Button>
         </ButtonGroup>
+        <PartnersInfo>
+          해당 링크를 통해 제품 구매가 이루어진 경우 쿠팡 파트너스 활동 일환으로
+          인해 일정 수수료가 어플리케이션 제공자에게 지급될 수 있습니다.
+        </PartnersInfo>
       </PagePadding>
     </>
   );
