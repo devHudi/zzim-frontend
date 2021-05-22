@@ -42,6 +42,11 @@ const FlexBox = styled.div`
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  & input {
+    max-width: 50%;
+  }
 `;
 
 const DetailTitle = styled.span`
@@ -118,7 +123,11 @@ const ItemDetail = () => {
           <ItemName>메종키츠네 더블 폭스헤드 반팔 티셔츠 BU0</ItemName>
         )}
         <Space />
-        {modify ? <TextField /> : <ItemPrice>{comma(35000)} 원</ItemPrice>}
+        {modify ? (
+          <TextField type="number" />
+        ) : (
+          <ItemPrice>{comma(35000)} 원</ItemPrice>
+        )}
         <Space size="20" />
       </TitleWrapper>
 
@@ -128,7 +137,11 @@ const ItemDetail = () => {
       <PagePadding>
         <FlexBox>
           <DetailTitle>배송비</DetailTitle>
-          {modify ? <TextField /> : <DetailDesc>{comma(2500)} 원</DetailDesc>}
+          {modify ? (
+            <TextField type="number" small right />
+          ) : (
+            <DetailDesc>{comma(2500)} 원</DetailDesc>
+          )}
         </FlexBox>
 
         <FlexBox>
