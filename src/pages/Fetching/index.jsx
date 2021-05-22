@@ -54,7 +54,7 @@ const Fetching = () => {
       history.push("/add-complete");
       // setItem(dummyItem);
     }, 3000);
-  }, []);
+  }, [history]);
 
   console.log(form.url);
 
