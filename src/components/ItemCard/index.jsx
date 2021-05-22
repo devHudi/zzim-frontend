@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  background-color: #ffffff;
 `;
 
 const ImageWrapper = styled.div`
