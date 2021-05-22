@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
@@ -27,10 +27,10 @@ const MenuWrapper = styled.ul`
 `;
 
 const Menu = styled.li`
-  min-width: 70px;
-  padding: 10px;
+  min-width: 100px;
+  padding: 12px;
   border-bottom: 1px solid #f1f3f5;
-  font-size: 10pt;
+  font-size: 11pt;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -51,9 +51,22 @@ const Menu = styled.li`
 const MeatBallsMenu = ({ children, left, white }) => {
   const [visible, setVisible] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
     setVisible(!visible);
   };
+
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      setVisible(false);
+    });
+
+    return () => {
+      window.removeEventListener("click", () => {
+        setVisible(false);
+      });
+    };
+  }, []);
 
   return (
     <Wrapper>
