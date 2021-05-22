@@ -6,7 +6,6 @@ const Icon = styled.span`
   cursor: pointer;
   font-size: 28px;
   color: ${(props) => (props.white ? "#ffffff" : "#212529")};
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
   transition: color 0.3s;
 
   &:hover {

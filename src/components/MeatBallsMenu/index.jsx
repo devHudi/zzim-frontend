@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { BsThreeDots } from "react-icons/bs";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 const Wrapper = styled.span`
   position: relative;
@@ -10,7 +10,6 @@ const Icon = styled.span`
   cursor: pointer;
   font-size: 28px;
   color: ${(props) => (props.white ? "#ffffff" : "#212529")};
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
   transition: color 0.3s;
 
   &:hover {
@@ -59,7 +58,7 @@ const MeatBallsMenu = ({ children, left, white }) => {
   return (
     <Wrapper>
       <Icon onClick={handleClick} white={white}>
-        <BsThreeDots />
+        <HiOutlineDotsHorizontal />
       </Icon>
 
       {visible && (
