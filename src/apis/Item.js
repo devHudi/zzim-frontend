@@ -29,6 +29,7 @@ export const getUserItems = async (userId) => {
       name: "메종키츠네 더블 폭스헤드 반팔 티셔츠",
       price: 35000,
       shoppingMallName: "MUST IT",
+      isPurchased: false,
     },
     {
       id: "item2",
@@ -37,6 +38,7 @@ export const getUserItems = async (userId) => {
       name: "[국내배송] 21SS 아미 스몰 하트 로고 반팔 티셔츠 네이비 E21HJ108 723",
       price: 148000,
       shoppingMallName: "ALAND",
+      isPurchased: true,
     },
     {
       id: "item3",
@@ -45,6 +47,7 @@ export const getUserItems = async (userId) => {
       name: "당도선별 성주 벽진참외",
       price: 999999,
       shoppingMallName: "COUPANG",
+      isPurchased: false,
     },
   ];
 
@@ -64,6 +67,7 @@ export const getItemDetail = async (itemId) => {
       "https://upload.wikimedia.org/wikipedia/commons/3/35/Coupang_logo.png",
     createdDate: new Date(),
     url: "https://www.naver.com",
+    isPurchased: false,
   };
 
   return dummyItem;

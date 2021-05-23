@@ -4,7 +4,7 @@ import toast from "react-simple-toasts";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import { Image } from "components";
+import { Image, PurchasedDimmer } from "components";
 
 const Wrapper = styled.div`
   position: relative;
@@ -53,12 +53,22 @@ const ItemPrice = styled.div`
   font-weight: bold;
 `;
 
-const ItemCard = ({ name, shop, price, thumb, skeleton, onClick }) => {
+const ItemCard = ({
+  name,
+  shop,
+  price,
+  thumb,
+  isPurchased,
+  skeleton,
+  onClick,
+}) => {
   return (
     <Wrapper onClick={onClick}>
       <ImageWrapper>
         {!skeleton ? (
-          <Image height="165px" src={thumb} />
+          <Image height="165px" src={thumb}>
+            {isPurchased && <PurchasedDimmer />}
+          </Image>
         ) : (
           <Skeleton height={165} />
         )}

@@ -23,6 +23,7 @@ import {
   Space,
   TextField,
   ButtonGroup,
+  PurchasedDimmer,
 } from "components";
 
 const MenuWrapper = styled.div`
@@ -176,7 +177,9 @@ const ItemDetail = () => {
       </TitleWrapper>
 
       {item?.image ? (
-        <Image src={item.image}></Image>
+        <Image src={item.image}>
+          {item?.isPurchased && <PurchasedDimmer />}
+        </Image>
       ) : (
         <Skeleton height={300} />
       )}

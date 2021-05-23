@@ -103,6 +103,7 @@ const Main = ({ noPublic }) => {
                   shop={item.shoppingMallName}
                   price={item.price}
                   thumb={item.image}
+                  isPurchased={item.isPurchased}
                   onClick={handleItemClick}
                 />
               ))
