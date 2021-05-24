@@ -13,7 +13,6 @@ import {
   Typography,
   ButtonGroup,
   Button,
-  TextField,
 } from "components";
 
 const BackWrapper = styled.div`
@@ -30,6 +29,12 @@ const FlexBox = styled.div`
   display: flex;
 `;
 
+const checkUrl = (text) => {
+  if (text.substr(0, 7) === "http://" || text.substr(0, 8) === "https://") {
+    return true;
+  }
+};
+
 const ItemManullyAdd = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -37,7 +42,7 @@ const ItemManullyAdd = () => {
 
   useEffect(() => {
     navigator.clipboard.readText().then((clipText) => {
-      if (_.includes(clipText, "https://") || _.includes(clipText, "http://")) {
+      if (checkUrl(clipText)) {
         setInput(clipText);
         toast("복사된 URL을 자동으로 입력합니다.");
       }
@@ -64,7 +69,7 @@ const ItemManullyAdd = () => {
           <Space size={15} />
           <Typography.Subtitle>쇼핑몰 URL을 입력해주세요.</Typography.Subtitle>
           <Space size={15} />
-          <TextField value={input} onChange={handleChange}></TextField>
+          <input type="text" value={input} onChange={handleChange} />
         </PagePadding>
       </FlexBox>
       <ButtonGroup fixed>
