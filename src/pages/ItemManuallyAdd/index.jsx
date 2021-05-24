@@ -74,7 +74,9 @@ const ItemManullyAdd = () => {
         </PagePadding>
       </FlexBox>
       <ButtonGroup fixed>
-        <Button onClick={handleNext}>다음으로</Button>
+        <Button disabled={!checkUrl(input)} onClick={handleNext}>
+          다음으로
+        </Button>
       </ButtonGroup>
     </>
   );
