@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import moment from "moment";
 import comma from "comma-number";
@@ -85,25 +85,30 @@ const PartnersInfo = styled.div`
 `;
 
 const ItemDetail = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const [modify, setModify] = useState(false);
-  const [item, setItem] = useState();
+  const [item, setItem] = useState({
+    price: null,
+    shippingPrice: null,
+  });
+
+  const fetchItem = async () => {
+    const item = await getItemDetail(id);
+    setItem(item);
+  };
 
   useEffect(() => {
-    const fetchItem = async () => {
-      const item = await getItemDetail("itemId");
-      setItem(item);
-    };
-
     fetchItem();
   }, []);
 
   const submitModify = async () => {
     dispatch(showSpinner());
     const { name, price, shippingPrice } = item;
-    const newItem = await updateItemDetail("item1", name, price, shippingPrice);
+    const newItem = await updateItemDetail(id, name, price, shippingPrice);
     setItem(newItem);
+    fetchItem();
     dispatch(hideSpinner());
   };
 
@@ -117,7 +122,7 @@ const ItemDetail = () => {
 
   const handlePurchase = async () => {
     dispatch(showSpinner());
-    await purchaseItem("itemId");
+    await purchaseItem(id);
     toast("구매 처리 되었습니다.");
     history.push("/");
     dispatch(hideSpinner());
@@ -125,7 +130,7 @@ const ItemDetail = () => {
 
   const handleDelete = async () => {
     dispatch(showSpinner());
-    await removeItem("itemId");
+    await removeItem(id);
     toast("삭제 처리 되었습니다.");
     history.push("/");
     dispatch(hideSpinner());
@@ -177,9 +182,7 @@ const ItemDetail = () => {
       </TitleWrapper>
 
       {item?.image ? (
-        <Image src={item.image}>
-          {item?.isPurchased && <PurchasedDimmer />}
-        </Image>
+        <Image src={item.image}>{item?.purchased && <PurchasedDimmer />}</Image>
       ) : (
         <Skeleton height={300} />
       )}
@@ -201,8 +204,14 @@ const ItemDetail = () => {
             />
           ) : (
             <DetailDesc>
-              {item?.shippingPrice ? (
-                <>{comma(item.shippingPrice)} 원</>
+              {item.shippingPrice !== null ? (
+                <>
+                  {item.shippingPrice > 0 ? (
+                    <>{comma(item.shippingPrice)} 원</>
+                  ) : (
+                    "무료"
+                  )}
+                </>
               ) : (
                 <Skeleton width={100} />
               )}

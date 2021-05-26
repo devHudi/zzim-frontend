@@ -33,16 +33,17 @@ const Text = styled.div`
 
 const Fetching = () => {
   const history = useHistory();
+  const form = useSelector((state) => state.form);
 
   useEffect(() => {
     const handleFetch = async () => {
-      const result = await addItem("https://item.url");
+      const result = await addItem(form.url);
       if (result) history.push("/add-complete");
       else history.push("/not-supported");
     };
 
     handleFetch();
-  }, [history]);
+  }, [history, form]);
 
   return (
     <FlexBox>

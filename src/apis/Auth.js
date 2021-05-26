@@ -1,27 +1,33 @@
-const dummyApiCall = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("DUMMY");
-    }, 2000);
+import axios from "axios";
+import qs from "qs";
+
+export const signIn = async (username, password) => {
+  const form = qs.stringify({
+    username,
+    password,
   });
-};
 
-export const signIn = async (id, password) => {
-  /*
-    서버에 유저 ID와 Password 전송 후 200이면 반환된 sessionId 쿠키에 저장
-    아니면 로그인 실패
-  */
+  const res = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/user/signin`,
+    form,
+    { withCredentials: true }
+  );
 
-  const res = await dummyApiCall();
   return true;
 };
 
-export const signUp = async (id, password) => {
-  /*
-    서버에 유저 ID와 Password 전송 후 200이면 반환된 sessionId 쿠키에 저장
-    아니면 회원가입 실패
-  */
+export const signUp = async (username, password) => {
+  const form = qs.stringify({
+    username,
+    nickname: username,
+    password,
+  });
 
-  const res = await dummyApiCall();
+  const res = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/user/signup`,
+    form,
+    { withCredentials: true }
+  );
+
   return true;
 };

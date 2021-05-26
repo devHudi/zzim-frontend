@@ -62,7 +62,7 @@ const SignInForm = () => {
 
   const handleSignIn = async () => {
     dispatch(showSpinner());
-    await signUp();
+    await signIn(id, password);
     dispatch(hideSpinner());
     toast("로그인 되었습니다. ");
     history.push("/");
@@ -104,7 +104,7 @@ const SignUpForm = () => {
 
   const handleSignUp = async () => {
     dispatch(showSpinner());
-    await signIn();
+    await signUp(id, password);
     dispatch(hideSpinner());
     toast("회원가입 되었습니다. ");
     history.push("/");

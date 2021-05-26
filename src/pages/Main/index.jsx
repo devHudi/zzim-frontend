@@ -69,18 +69,18 @@ const Private = () => {
 
 const Main = ({ noPublic }) => {
   const history = useHistory();
-  const [items, setItems] = useState();
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchItems = async () => {
-      const items = await getUserItems("userId");
+      const items = await getUserItems();
       setItems(items);
     };
     fetchItems();
   }, []);
 
-  const handleItemClick = () => {
-    history.push("/item-detail/item-id");
+  const handleItemClick = (id) => {
+    history.push(`/item-detail/${id}`);
   };
 
   const handleAddClick = () => {
@@ -90,7 +90,7 @@ const Main = ({ noPublic }) => {
   return (
     <>
       <GlobalStyle />
-      <Header name="thanos50per" itemAmount={17} />
+      <Header name="" itemAmount={items.length} />
       {noPublic ? (
         <Private />
       ) : (
@@ -103,8 +103,8 @@ const Main = ({ noPublic }) => {
                   shop={item.shoppingMallName}
                   price={item.price}
                   thumb={item.image}
-                  isPurchased={item.isPurchased}
-                  onClick={handleItemClick}
+                  isPurchased={item.purchased}
+                  onClick={() => handleItemClick(item.id)}
                 />
               ))
             ) : (
