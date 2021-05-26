@@ -63,11 +63,11 @@ const SignInForm = () => {
   const handleSignIn = async () => {
     dispatch(showSpinner());
     const user = await signIn(id, password);
+    dispatch(hideSpinner());
     if (!user) {
       toast("로그인에 문제가 발생했습니다.");
       return;
     }
-    dispatch(hideSpinner());
     toast("로그인 되었습니다. ");
     history.push("/");
   };
@@ -109,11 +109,11 @@ const SignUpForm = () => {
   const handleSignUp = async () => {
     dispatch(showSpinner());
     const res = await signUp(id, password);
+    dispatch(hideSpinner());
     if (!res) {
-      toast("로그인에 문제가 발생했습니다.");
+      toast("회원가입에 문제가 발생했습니다.");
       return;
     }
-    dispatch(hideSpinner());
     toast("회원가입 되었습니다. ");
     history.push("/");
   };
