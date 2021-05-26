@@ -29,6 +29,7 @@ export const signOut = async () => {
       {},
       { withCredentials: true }
     );
+    localStorage.removeItem("username");
   } catch {
     return false;
   }
@@ -49,10 +50,11 @@ export const signUp = async (username, password) => {
       form,
       { withCredentials: true }
     );
+
+    localStorage.setItem("username", username);
   } catch {
     return false;
   }
-  localStorage.removeItem("username");
 
   return true;
 };
