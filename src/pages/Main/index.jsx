@@ -73,7 +73,7 @@ const Main = () => {
       setItems(res);
     };
     fetchItems();
-  }, []);
+  }, [id, history]);
 
   const handleItemClick = (id) => {
     history.push(`/item-detail/${id}`);
@@ -103,6 +103,12 @@ const Main = () => {
       />
       <MenuWrapper>
         <MeatBallsMenu white left>
+          {id && (
+            <MeatBallsMenu.Menu onClick={() => history.push("/")}>
+              나의 <br />
+              위시리스트
+            </MeatBallsMenu.Menu>
+          )}
           <MeatBallsMenu.Menu onClick={handleShare}>
             공유하기
           </MeatBallsMenu.Menu>
