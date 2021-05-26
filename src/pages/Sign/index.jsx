@@ -62,8 +62,8 @@ const SignInForm = () => {
 
   const handleSignIn = async () => {
     dispatch(showSpinner());
-    const res = await signIn(id, password);
-    if (!res) {
+    const user = await signIn(id, password);
+    if (!user) {
       toast("로그인에 문제가 발생했습니다.");
       return;
     }

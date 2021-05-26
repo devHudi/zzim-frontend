@@ -1,19 +1,12 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
+import styled, { createGlobalStyle } from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import { VscLock } from "react-icons/vsc";
 import { RiWindyFill } from "react-icons/ri";
 import { getUserItems } from "apis/Item";
 import toast from "react-simple-toasts";
-import {
-  Header,
-  AddItemButton,
-  ItemCard,
-  ButtonGroup,
-  Button,
-  Space,
-} from "components";
-import { createGlobalStyle } from "styled-components";
+import { Header, AddItemButton, ItemCard, MeatBallsMenu } from "components";
+import { signOut } from "apis/Auth";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -30,26 +23,6 @@ const GridWrapper = styled.div`
   justify-items: center;
 `;
 
-const PrivateWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 500px;
-
-  & > div {
-    text-align: center;
-  }
-`;
-
-const Icon = styled.div`
-  font-size: 100pt;
-`;
-
-const Text = styled.div`
-  font-size: 15pt;
-`;
-
 const EmptyWrapper = styled.div`
   margin-top: 100px;
   text-align: center;
@@ -59,6 +32,12 @@ const EmptyWrapper = styled.div`
 
 const EmptyIconWrapper = styled.div`
   font-size: 100px;
+`;
+
+const MenuWrapper = styled.div`
+  position: fixed;
+  top: 10px;
+  right: 10px;
 `;
 
 const Empty = () => {
@@ -77,12 +56,14 @@ const Main = () => {
   const { id } = useParams();
   const history = useHistory();
   const [items, setItems] = useState([]);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchItems = async () => {
       const items = await getUserItems(id);
       if (!items) {
-        toast("상품정보를 수정하는데 문제가 생겼습니다.");
+        toast("로그인을 해주세요.");
+        history.push("/sign");
         return;
       }
       setItems(items);
@@ -98,10 +79,31 @@ const Main = () => {
     history.push("/item-manually-add");
   };
 
+  const handleShare = async () => {
+    await navigator.clipboard.writeText("http://zzim.app");
+    toast("위시리스트 주소가 복사되었습니다.");
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast("로그아웃 되었습니다.");
+    history.push("/sign");
+  };
+
   return (
     <>
       <GlobalStyle />
-      <Header name="" itemAmount={items.length} />
+      <Header name={user.username} itemAmount={items.length} />
+      <MenuWrapper>
+        <MeatBallsMenu white left>
+          <MeatBallsMenu.Menu onClick={handleShare}>
+            공유하기
+          </MeatBallsMenu.Menu>
+          <MeatBallsMenu.Menu onClick={handleSignOut}>
+            로그아웃
+          </MeatBallsMenu.Menu>
+        </MeatBallsMenu>
+      </MenuWrapper>
       {items ? (
         <>
           {items.length === 0 ? (
