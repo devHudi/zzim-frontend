@@ -41,7 +41,7 @@ const TextField = styled.input`
     margin-bottom: 60px;
   }
 
-  &:hover {
+  &:focus {
     border-bottom: 1px solid #495057;
   }
 `;
