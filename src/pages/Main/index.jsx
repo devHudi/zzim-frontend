@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { VscLock } from "react-icons/vsc";
+import { RiWindyFill } from "react-icons/ri";
 import { getUserItems } from "apis/Item";
 import {
   Header,
@@ -47,6 +48,29 @@ const Icon = styled.div`
 const Text = styled.div`
   font-size: 15pt;
 `;
+
+const EmptyWrapper = styled.div`
+  margin-top: 100px;
+  text-align: center;
+  color: #adb5bd;
+  font-weight: bold;
+`;
+
+const EmptyIconWrapper = styled.div`
+  font-size: 100px;
+`;
+
+const Empty = () => {
+  return (
+    <EmptyWrapper>
+      <EmptyIconWrapper>
+        <RiWindyFill />
+      </EmptyIconWrapper>
+      <br />
+      아무 상품도 없어요.
+    </EmptyWrapper>
+  );
+};
 
 const Private = () => {
   const history = useHistory();
@@ -95,28 +119,34 @@ const Main = ({ noPublic }) => {
         <Private />
       ) : (
         <>
-          <GridWrapper>
-            {items ? (
-              items.map((item) => (
-                <ItemCard
-                  name={item.name}
-                  shop={item.shoppingMallName}
-                  price={item.price}
-                  thumb={item.image}
-                  isPurchased={item.purchased}
-                  onClick={() => handleItemClick(item.id)}
-                />
-              ))
-            ) : (
-              <>
-                <ItemCard skeleton />
-                <ItemCard skeleton />
-                <ItemCard skeleton />
-                <ItemCard skeleton />
-                <ItemCard skeleton />
-              </>
-            )}
-          </GridWrapper>
+          {items ? (
+            <>
+              {items.length === 0 ? (
+                <Empty />
+              ) : (
+                <GridWrapper>
+                  {items.map((item) => (
+                    <ItemCard
+                      name={item.name}
+                      shop={item.shoppingMallName}
+                      price={item.price}
+                      thumb={item.image}
+                      isPurchased={item.purchased}
+                      onClick={() => handleItemClick(item.id)}
+                    />
+                  ))}
+                </GridWrapper>
+              )}
+            </>
+          ) : (
+            <GridWrapper>
+              <ItemCard skeleton />
+              <ItemCard skeleton />
+              <ItemCard skeleton />
+              <ItemCard skeleton />
+              <ItemCard skeleton />
+            </GridWrapper>
+          )}
           <AddItemButton onClick={handleAddClick} />
         </>
       )}
