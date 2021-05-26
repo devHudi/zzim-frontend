@@ -13,9 +13,23 @@ export const getUserItems = async (userId = null) => {
     불일치 시 만약 user 의 위시리스트가 private 이라면 status:401
     public 위시리스트라면 정상적으로 위시리스트 반환
   */
-  const res = axios.get(`${process.env.REACT_APP_API_BASE_URL}/user`, {
-    withCredentials: true,
-  });
+  let res = null;
+  try {
+    if (!userId) {
+      res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/user`, {
+        withCredentials: true,
+      });
+    } else {
+      res = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/user/${userId}`,
+        {
+          withCredentials: true,
+        }
+      );
+    }
+  } catch {
+    return false;
+  }
 
   const items = (await res).data.data;
 
@@ -23,12 +37,18 @@ export const getUserItems = async (userId = null) => {
 };
 
 export const getItemDetail = async (itemId) => {
-  const res = axios.get(
-    `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}`,
-    {
-      withCredentials: true,
-    }
-  );
+  let res = null;
+  try {
+    res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}`,
+      {
+        withCredentials: true,
+      }
+    );
+  } catch {
+    return false;
+  }
+
   const item = (await res).data;
 
   return item;
@@ -41,35 +61,47 @@ export const updateItemDetail = async (itemId, name, price, shippingPrice) => {
     shipping: shippingPrice,
   });
 
-  const res = axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}/edit`,
-    form,
-    { withCredentials: true }
-  );
+  let res = null;
+  try {
+    res = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}/edit`,
+      form,
+      { withCredentials: true }
+    );
+  } catch {
+    return false;
+  }
 
   return true;
 };
 
 export const purchaseItem = async (itemId) => {
-  const res = axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}/purchased`,
-    {},
-    { withCredentials: true }
-  );
-
-  // 해당 상품 데이터의 구매여부를 true 로 변경합니다
-  // session 으로 권한 확인 필요
-  // 성공여부만 status 로 반환해주세요!
+  let res = null;
+  try {
+    res = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}/purchased`,
+      {},
+      { withCredentials: true }
+    );
+  } catch {
+    return false;
+  }
 
   return true;
 };
 
 export const removeItem = async (itemId) => {
-  const res = axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}/delete`,
-    {},
-    { withCredentials: true }
-  );
+  let res = null;
+  try {
+    res = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/item/${itemId}/delete`,
+      {},
+      { withCredentials: true }
+    );
+  } catch {
+    return false;
+  }
+
   return true;
 };
 
@@ -78,11 +110,18 @@ export const addItem = async (itemUrl) => {
     url: itemUrl,
   });
 
-  const res = axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/item/add`,
-    form,
-    { withCredentials: true }
-  );
+  let res = null;
+  try {
+    res = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/item/add`,
+      form,
+      {
+        withCredentials: true,
+      }
+    );
+  } catch {
+    return false;
+  }
 
   return true;
 };

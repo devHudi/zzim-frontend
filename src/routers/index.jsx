@@ -49,7 +49,7 @@ const RootRouter = () => {
             <Main />
           </Route>
           <Route exact path="/:id">
-            <Main noPublic />
+            <Main />
           </Route>
           <Router path="*">
             <Main />

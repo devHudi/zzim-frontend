@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { VscLock } from "react-icons/vsc";
 import { RiWindyFill } from "react-icons/ri";
 import { getUserItems } from "apis/Item";
+import toast from "react-simple-toasts";
 import {
   Header,
   AddItemButton,
@@ -72,32 +73,18 @@ const Empty = () => {
   );
 };
 
-const Private = () => {
-  const history = useHistory();
-
-  return (
-    <PrivateWrapper>
-      <div>
-        <Icon>
-          <VscLock />
-        </Icon>
-        <Text>비공개 ZZIM 입니다.</Text>
-        <Space size="30" />
-        <ButtonGroup>
-          <Button onClick={() => history.push("/")}>내 ZZIM 으로</Button>
-        </ButtonGroup>
-      </div>
-    </PrivateWrapper>
-  );
-};
-
-const Main = ({ noPublic }) => {
+const Main = () => {
+  const { id } = useParams();
   const history = useHistory();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchItems = async () => {
-      const items = await getUserItems();
+      const items = await getUserItems(id);
+      if (!items) {
+        toast("상품정보를 수정하는데 문제가 생겼습니다.");
+        return;
+      }
       setItems(items);
     };
     fetchItems();
@@ -115,41 +102,35 @@ const Main = ({ noPublic }) => {
     <>
       <GlobalStyle />
       <Header name="" itemAmount={items.length} />
-      {noPublic ? (
-        <Private />
-      ) : (
+      {items ? (
         <>
-          {items ? (
-            <>
-              {items.length === 0 ? (
-                <Empty />
-              ) : (
-                <GridWrapper>
-                  {items.map((item) => (
-                    <ItemCard
-                      name={item.name}
-                      shop={item.shoppingMallName}
-                      price={item.price}
-                      thumb={item.image}
-                      isPurchased={item.purchased}
-                      onClick={() => handleItemClick(item.id)}
-                    />
-                  ))}
-                </GridWrapper>
-              )}
-            </>
+          {items.length === 0 ? (
+            <Empty />
           ) : (
             <GridWrapper>
-              <ItemCard skeleton />
-              <ItemCard skeleton />
-              <ItemCard skeleton />
-              <ItemCard skeleton />
-              <ItemCard skeleton />
+              {items.map((item) => (
+                <ItemCard
+                  name={item.name}
+                  shop={item.shoppingMallName}
+                  price={item.price}
+                  thumb={item.image}
+                  isPurchased={item.purchased}
+                  onClick={() => handleItemClick(item.id)}
+                />
+              ))}
             </GridWrapper>
           )}
-          <AddItemButton onClick={handleAddClick} />
         </>
+      ) : (
+        <GridWrapper>
+          <ItemCard skeleton />
+          <ItemCard skeleton />
+          <ItemCard skeleton />
+          <ItemCard skeleton />
+          <ItemCard skeleton />
+        </GridWrapper>
       )}
+      <AddItemButton onClick={handleAddClick} />
     </>
   );
 };

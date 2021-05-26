@@ -7,11 +7,15 @@ export const signIn = async (username, password) => {
     password,
   });
 
-  const res = axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/user/signin`,
-    form,
-    { withCredentials: true }
-  );
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/user/signin`,
+      form,
+      { withCredentials: true }
+    );
+  } catch {
+    return false;
+  }
 
   return true;
 };
@@ -23,11 +27,15 @@ export const signUp = async (username, password) => {
     password,
   });
 
-  const res = axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/user/signup`,
-    form,
-    { withCredentials: true }
-  );
+  try {
+    await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/user/signup`,
+      form,
+      { withCredentials: true }
+    );
+  } catch {
+    return false;
+  }
 
   return true;
 };

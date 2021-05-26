@@ -96,6 +96,10 @@ const ItemDetail = () => {
 
   const fetchItem = async () => {
     const item = await getItemDetail(id);
+    if (!item) {
+      toast("상품정보를 불러오는데 문제가 생겼습니다.");
+      return;
+    }
     setItem(item);
   };
 
@@ -106,8 +110,13 @@ const ItemDetail = () => {
   const submitModify = async () => {
     dispatch(showSpinner());
     const { name, price, shippingPrice } = item;
-    const newItem = await updateItemDetail(id, name, price, shippingPrice);
-    setItem(newItem);
+    const res = await updateItemDetail(id, name, price, shippingPrice);
+
+    if (!res) {
+      toast("상품정보를 수정하는데 문제가 생겼습니다.");
+      return;
+    }
+
     fetchItem();
     dispatch(hideSpinner());
   };
@@ -122,7 +131,12 @@ const ItemDetail = () => {
 
   const handlePurchase = async () => {
     dispatch(showSpinner());
-    await purchaseItem(id);
+    const res = await purchaseItem(id);
+    if (!res) {
+      toast("상품정보를 수정하는데 문제가 생겼습니다.");
+      return;
+    }
+
     toast("구매 처리 되었습니다.");
     history.push("/");
     dispatch(hideSpinner());
@@ -130,7 +144,11 @@ const ItemDetail = () => {
 
   const handleDelete = async () => {
     dispatch(showSpinner());
-    await removeItem(id);
+    const res = await removeItem(id);
+    if (!res) {
+      toast("상품정보를 수정하는데 문제가 생겼습니다.");
+      return;
+    }
     toast("삭제 처리 되었습니다.");
     history.push("/");
     dispatch(hideSpinner());
