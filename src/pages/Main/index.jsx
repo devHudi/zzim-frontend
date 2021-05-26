@@ -60,13 +60,17 @@ const Main = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const items = await getUserItems(id);
-      if (!items) {
+      const res = await getUserItems(id);
+      if (res === 0) {
         toast("로그인을 해주세요.");
         history.push("/sign");
         return;
+      } else if (res === 1) {
+        toast("존재하지 않는 위시리스트입니다.");
+        history.push("/");
+        return;
       }
-      setItems(items);
+      setItems(res);
     };
     fetchItems();
   }, []);
@@ -93,7 +97,10 @@ const Main = () => {
   return (
     <>
       <GlobalStyle />
-      <Header name={user.username} itemAmount={items.length} />
+      <Header
+        name={id || localStorage.getItem("username")}
+        itemAmount={items.length}
+      />
       <MenuWrapper>
         <MeatBallsMenu white left>
           <MeatBallsMenu.Menu onClick={handleShare}>

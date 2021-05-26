@@ -14,11 +14,12 @@ export const signIn = async (username, password) => {
       form,
       { withCredentials: true }
     );
+
+    localStorage.setItem("username", res.data.data.username);
+    return true;
   } catch {
     return false;
   }
-
-  return res.data.data;
 };
 
 export const signOut = async () => {
@@ -51,6 +52,7 @@ export const signUp = async (username, password) => {
   } catch {
     return false;
   }
+  localStorage.removeItem("username");
 
   return true;
 };
