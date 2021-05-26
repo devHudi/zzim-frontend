@@ -76,8 +76,13 @@ const Main = () => {
     fetchItems();
   }, [id, history]);
 
-  const handleItemClick = (id) => {
-    history.push(`/item-detail/${id}`);
+  const handleItemClick = (itemId) => {
+    if (id) {
+      toast("타인의 위시리스트는 상세보기가 불가능합니다.");
+      return;
+    }
+
+    history.push(`/item-detail/${itemId}`);
   };
 
   const handleAddClick = () => {
