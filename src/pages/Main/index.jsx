@@ -90,8 +90,15 @@ const Main = () => {
   };
 
   const handleShare = async () => {
-    await navigator.clipboard.writeText("http://zzim.app");
-    toast("위시리스트 주소가 복사되었습니다.");
+    if (id) {
+      await navigator.clipboard.writeText(`https://zzim.app/${id}`);
+      toast("위시리스트 주소가 복사되었습니다.");
+    } else {
+      await navigator.clipboard.writeText(
+        `https://zzim.app/${localStorage.getItem("username")}`
+      );
+      toast("위시리스트 주소가 복사되었습니다.");
+    }
   };
 
   const handleSignOut = async () => {
