@@ -76,9 +76,9 @@ const Main = () => {
     fetchItems();
   }, [id, history]);
 
-  const handleItemClick = (itemId) => {
+  const handleItemClick = (itemId, url) => {
     if (id) {
-      toast("타인의 위시리스트는 상세보기가 불가능합니다.");
+      window.open(url);
       return;
     }
 
@@ -143,7 +143,7 @@ const Main = () => {
                   price={item.price}
                   thumb={item.image}
                   isPurchased={item.purchased}
-                  onClick={() => handleItemClick(item.id)}
+                  onClick={() => handleItemClick(item.id, item.url)}
                 />
               ))}
             </GridWrapper>
