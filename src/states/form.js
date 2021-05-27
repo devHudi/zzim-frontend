@@ -28,7 +28,6 @@ export const clearUrl = () => {
 
 // reducer
 const reducer = (state = initialState, action) => {
-  console.log({ action });
   switch (action.type) {
     case SET_URL: {
       return { ...state, url: action.data.url };

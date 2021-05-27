@@ -28,7 +28,6 @@ export const getUserItems = async (userId = null) => {
   }
 
   const items = (await res).data.data;
-  console.log("문제없어야함", items);
 
   return items;
 };
